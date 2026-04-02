@@ -1,0 +1,115 @@
+<!--
+  ============================================================
+  dtd.dtd  –  Document Type Definition for Expense Tracker
+  ============================================================
+  This DTD defines the structure and validation rules for
+  data.xml.  Every element name, its allowed children, and
+  every attribute (including the required ID attributes) are
+  declared here.
+
+  Hierarchy:
+    expense_tracker
+      ├── users
+      │     └── user  (id: ID, required)
+      │           ├── username
+      │           ├── password
+      │           ├── email
+      │           └── created_at
+      ├── expenses
+      │     └── expense  (id: ID, required)
+      │           ├── title
+      │           ├── amount
+      │           ├── category
+      │           ├── date
+      │           ├── description
+      │           └── user_id
+      └── budgets
+            └── budget  (id: ID, required)
+                  ├── user_id
+                  ├── month
+                  ├── year
+                  └── amount
+
+  NOTE: In a DTD each element name may only be declared once.
+  Elements shared between sections (amount, user_id) use the
+  same (#PCDATA) content model, which is compatible for all
+  occurrences in the document.
+  ============================================================
+-->
+
+<!-- ── Root element ──────────────────────────────────────── -->
+<!-- expense_tracker must contain exactly one users section,
+     one expenses section, and one budgets section, in order -->
+<!ELEMENT expense_tracker (users, expenses, budgets)>
+
+<!-- ── Users section ─────────────────────────────────────── -->
+<!-- users contains zero or more user elements              -->
+<!ELEMENT users (user*)>
+
+<!-- user contains four child elements (in this exact order) -->
+<!-- The id attribute is of XML type ID, meaning it must be  -->
+<!-- unique across the entire document (e.g., u1, u2, ...)   -->
+<!ELEMENT user (username, password, email, created_at)>
+<!ATTLIST user
+    id  ID  #REQUIRED
+>
+
+<!-- username: the login handle (alphanumeric)               -->
+<!ELEMENT username   (#PCDATA)>
+
+<!-- password: bcrypt-hashed password string                 -->
+<!ELEMENT password   (#PCDATA)>
+
+<!-- email: user's email address                             -->
+<!ELEMENT email      (#PCDATA)>
+
+<!-- created_at: registration date in YYYY-MM-DD format      -->
+<!ELEMENT created_at (#PCDATA)>
+
+<!-- ── Expenses section ──────────────────────────────────── -->
+<!-- expenses contains zero or more expense elements         -->
+<!ELEMENT expenses (expense*)>
+
+<!-- expense contains six child elements in the listed order -->
+<!-- The id attribute must be unique (e.g., e1, e2, ...)     -->
+<!ELEMENT expense (title, amount, category, date, description, user_id)>
+<!ATTLIST expense
+    id  ID  #REQUIRED
+>
+
+<!-- title: short label for the expense                      -->
+<!ELEMENT title       (#PCDATA)>
+
+<!-- amount: numeric value (stored as decimal string)        -->
+<!-- NOTE: shared with <budget> — (#PCDATA) applies to both  -->
+<!ELEMENT amount      (#PCDATA)>
+
+<!-- category: one of the predefined expense categories      -->
+<!ELEMENT category    (#PCDATA)>
+
+<!-- date: expense date in YYYY-MM-DD format                 -->
+<!ELEMENT date        (#PCDATA)>
+
+<!-- description: optional free-text note                    -->
+<!ELEMENT description (#PCDATA)>
+
+<!-- user_id: foreign-key reference to the owning user's id  -->
+<!-- NOTE: shared with <budget> — (#PCDATA) applies to both  -->
+<!ELEMENT user_id     (#PCDATA)>
+
+<!-- ── Budgets section ───────────────────────────────────── -->
+<!-- budgets contains zero or more budget elements           -->
+<!ELEMENT budgets (budget*)>
+
+<!-- budget: one monthly budget per user                     -->
+<!-- The id attribute must be unique (e.g., b1, b2, ...)     -->
+<!ELEMENT budget (user_id, month, year, amount)>
+<!ATTLIST budget
+    id  ID  #REQUIRED
+>
+
+<!-- month: numeric month (1–12)                             -->
+<!ELEMENT month (#PCDATA)>
+
+<!-- year: four-digit year (e.g., 2025)                      -->
+<!ELEMENT year  (#PCDATA)>

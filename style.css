@@ -1,0 +1,275 @@
+/* ═══════════════════════════════════════════════════════════
+   Expense Tracker — Dark Theme  (monkeytype-inspired)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Colour tokens + Bootstrap overrides ─────────────── */
+:root {
+    --bg:       #1a1a1a;
+    --sub-bg:   #2c2e31;
+    --sub-bg-2: #323437;
+    --text:     #d1d0c5;
+    --sub:      #646669;
+    --accent:   #e2b714;
+    --err:      #ca4754;
+    --ok:       #6a9b5e;
+    --font:     'Roboto Mono', 'Courier New', monospace;
+    --r:        8px;
+
+    --bs-body-bg:                  var(--bg);
+    --bs-body-color:               var(--text);
+    --bs-body-font-family:         var(--font);
+    --bs-body-font-size:           0.88rem;
+    --bs-secondary-color:          var(--sub);
+    --bs-border-color:             var(--sub-bg-2);
+    --bs-card-bg:                  var(--sub-bg);
+    --bs-card-border-color:        transparent;
+    --bs-table-color:              var(--text);
+    --bs-table-bg:                 transparent;
+    --bs-table-border-color:       var(--sub-bg-2);
+    --bs-table-hover-bg:           var(--sub-bg-2);
+    --bs-link-color:               var(--accent);
+    --bs-link-hover-color:         #c9a412;
+    --bs-input-bg:                 var(--sub-bg-2);
+    --bs-input-color:              var(--text);
+    --bs-input-border-color:       transparent;
+    --bs-input-focus-border-color: var(--accent);
+    --bs-input-placeholder-color:  var(--sub);
+    --bs-primary-rgb:              226, 183, 20;
+    --bs-danger-rgb:               202, 71, 84;
+    --bs-success-rgb:              106, 155, 94;
+    --bs-secondary-bg:             var(--sub-bg-2);
+    --bs-progress-bg:              var(--sub-bg-2);
+    --bs-light-rgb:                44, 46, 49;
+}
+
+/* ── 2. Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: .88rem;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: #c9a412; }
+
+/* ── 3. Sidebar ──────────────────────────────────────────── */
+.app-shell { min-height: 100vh; }
+
+.sidebar {
+    background: var(--sub-bg);
+    border-right: 1px solid var(--sub-bg-2);
+    min-height: 100vh;
+    padding: 1.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.brand-box {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: .9rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: .03em;
+}
+.brand-dim { opacity: .45; color: var(--text); }
+
+.user-info {
+    color: var(--sub);
+    font-size: .72rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+.user-info strong { color: var(--text); }
+
+.sidebar .nav-link {
+    color: var(--sub);
+    padding: .42rem .7rem;
+    border-radius: 6px;
+    margin-bottom: .1rem;
+    font-size: .8rem;
+    transition: color .1s, background .1s;
+    display: flex;
+    align-items: center;
+}
+.sidebar .nav-link:hover { color: var(--text); background: var(--sub-bg-2); }
+.sidebar .nav-link.active { color: var(--accent); background: rgba(226,183,20,.07); }
+.sidebar .nav-link.nav-logout { color: var(--err); margin-top: .5rem; }
+.sidebar .nav-link.nav-logout:hover { background: rgba(202,71,84,.1); color: var(--err); }
+
+/* ── 4. Main area ────────────────────────────────────────── */
+main { background: var(--bg); min-height: 100vh; }
+
+/* ── 5. Page headings ────────────────────────────────────── */
+.pg-title { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1; }
+.pg-sub   { font-size: .73rem; color: var(--sub); margin-top: .25rem; }
+
+/* ── 6. Stat cards ───────────────────────────────────────── */
+.stat-card { background: var(--sub-bg); border-radius: var(--r); padding: 1rem 1.2rem; height: 100%; }
+.stat-label { font-size: .7rem; color: var(--sub); letter-spacing: .05em; margin-bottom: .35rem; }
+.stat-value { font-size: 1.5rem; font-weight: 700; line-height: 1; color: var(--text); }
+.stat-value.v-accent { color: var(--accent); }
+.stat-value.v-err    { color: var(--err);    }
+.stat-value.v-ok     { color: var(--ok);     }
+.stat-value.v-sub    { color: var(--sub);    }
+.stat-note  { font-size: .7rem; color: var(--sub); margin-top: .3rem; }
+
+/* ── 7. Content cards ────────────────────────────────────── */
+.c-card { background: var(--sub-bg); border-radius: var(--r); overflow: hidden; }
+.c-card-head {
+    padding: .8rem 1.2rem;
+    border-bottom: 1px solid var(--sub-bg-2);
+    color: var(--sub);
+    font-size: .72rem;
+    letter-spacing: .05em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* Inner-page aliases */
+.content-card { background: var(--sub-bg); border-radius: var(--r); overflow: hidden; border: none !important; }
+.card-head {
+    padding: .8rem 1.2rem;
+    border-bottom: 1px solid var(--sub-bg-2);
+    color: var(--sub);
+    font-size: .72rem;
+    letter-spacing: .05em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.topbar-card  { background: var(--sub-bg) !important; border: none !important; border-radius: var(--r) !important; }
+.section-title { font-size: .95rem; font-weight: 700; color: var(--text); margin: 0; }
+.muted-small   { font-size: .75rem; color: var(--sub); }
+
+/* ── 8. Progress bars ────────────────────────────────────── */
+.progress { background: var(--sub-bg-2) !important; border-radius: 4px !important; }
+.progress-bar { background: var(--accent) !important; border-radius: 4px !important; transition: width .4s ease; }
+.progress-bar.pb-err { background: var(--err) !important; }
+.bg-success { background: var(--ok)     !important; }
+.bg-warning { background: var(--accent) !important; }
+.bg-danger  { background: var(--err)    !important; }
+
+/* ── 9. Dark table (dashboard) ───────────────────────────── */
+.dk-table { width: 100%; border-collapse: collapse; color: var(--text); font-size: .82rem; margin: 0; }
+.dk-table thead th {
+    color: var(--sub); font-size: .68rem; letter-spacing: .05em;
+    padding: .65rem 1rem; font-weight: 400;
+    border-bottom: 1px solid var(--sub-bg-2); white-space: nowrap;
+}
+.dk-table tbody tr { border-bottom: 1px solid var(--sub-bg-2); transition: background .1s; }
+.dk-table tbody tr:last-child { border-bottom: none; }
+.dk-table tbody tr:hover { background: var(--sub-bg-2); }
+.dk-table td { padding: .65rem 1rem; border: none; vertical-align: middle; }
+
+/* Bootstrap table override (inner pages) */
+.table {
+    --bs-table-color: var(--text);
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--sub-bg-2);
+    --bs-table-hover-bg: var(--sub-bg-2);
+}
+.table thead th { color: var(--sub) !important; font-size: .72rem; font-weight: 400; border-color: var(--sub-bg-2) !important; }
+.table td { border-color: var(--sub-bg-2) !important; }
+.table-hover > tbody > tr:hover > * { color: var(--text); }
+
+/* ── 10. Category pill ───────────────────────────────────── */
+.cat-pill {
+    font-size: .66rem; padding: .18em .55em; border-radius: 4px;
+    background: var(--sub-bg-2); color: var(--sub); letter-spacing: .03em; white-space: nowrap;
+}
+
+/* ── 11. Over-budget alert ───────────────────────────────── */
+.over-budget-bar {
+    background: rgba(202,71,84,.08); border: 1px solid rgba(202,71,84,.22);
+    color: var(--err); border-radius: var(--r); padding: .75rem 1rem; font-size: .82rem;
+}
+.over-budget-bar a { color: var(--err); text-decoration: underline; }
+
+/* ── 12. Buttons ─────────────────────────────────────────── */
+.btn { font-family: var(--font); font-size: .8rem; border-radius: 6px; }
+.btn-primary { background: var(--accent) !important; border-color: var(--accent) !important; color: #111 !important; font-weight: 600; }
+.btn-primary:hover, .btn-primary:focus { background: #c9a412 !important; border-color: #c9a412 !important; color: #111 !important; }
+.btn-success { background: var(--ok) !important; border-color: var(--ok) !important; color: #111 !important; font-weight: 600; }
+.btn-success:hover { background: #5a8a4e !important; border-color: #5a8a4e !important; }
+.btn-outline-primary { color: var(--accent) !important; border-color: var(--accent) !important; background: transparent !important; }
+.btn-outline-primary:hover { background: var(--accent) !important; color: #111 !important; }
+.btn-outline-danger { color: var(--err) !important; border-color: var(--err) !important; background: transparent !important; }
+.btn-outline-danger:hover { background: var(--err) !important; color: #fff !important; }
+.btn-outline-secondary { color: var(--sub) !important; border-color: var(--sub-bg-2) !important; background: var(--sub-bg-2) !important; }
+.btn-outline-secondary:hover { background: var(--sub-bg) !important; color: var(--text) !important; }
+
+/* ── 13. Form controls ───────────────────────────────────── */
+.form-control, .form-select {
+    background: var(--sub-bg-2) !important; border-color: transparent !important;
+    color: var(--text) !important; font-family: var(--font); font-size: .82rem;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent) !important; box-shadow: 0 0 0 2px rgba(226,183,20,.15) !important;
+}
+.form-control::placeholder { color: var(--sub) !important; }
+.form-select option { background: var(--sub-bg-2); color: var(--text); }
+.form-label { color: var(--sub); font-size: .73rem; margin-bottom: .3rem; }
+.input-group-text { background: var(--sub-bg-2) !important; border-color: transparent !important; color: var(--sub) !important; }
+
+/* ── 14. Alerts ──────────────────────────────────────────── */
+.alert { font-size: .82rem; border-radius: var(--r); }
+.alert-danger  { background: rgba(202,71,84,.08) !important; border-color: rgba(202,71,84,.25) !important; color: var(--err) !important; }
+.alert-success { background: rgba(106,155,94,.08) !important; border-color: rgba(106,155,94,.25) !important; color: var(--ok)  !important; }
+.alert-info    { background: rgba(226,183,20,.08) !important; border-color: rgba(226,183,20,.2)  !important; color: var(--accent) !important; }
+.btn-close { filter: invert(.6); }
+
+/* ── 15. Auth pages ──────────────────────────────────────── */
+.auth-page { background: var(--bg); min-height: 100vh; }
+.auth-card {
+    background: var(--sub-bg) !important;
+    border: 1px solid var(--sub-bg-2) !important;
+    border-radius: 12px !important;
+    color: var(--text) !important;
+}
+.auth-card h2, .auth-card h3 { color: var(--text); }
+.auth-card .text-muted { color: var(--sub) !important; }
+.auth-card hr { border-color: var(--sub-bg-2); opacity: 1; }
+.auth-card .form-check-input:checked { background-color: var(--accent); border-color: var(--accent); }
+.flash-alert { font-size: .82rem; }
+
+/* ── 16. Utility overrides ───────────────────────────────── */
+.text-muted   { color: var(--sub)    !important; }
+.text-danger  { color: var(--err)    !important; }
+.text-success { color: var(--ok)     !important; }
+.text-primary { color: var(--accent) !important; }
+.text-warning { color: var(--accent) !important; }
+.text-info    { color: var(--accent) !important; }
+.text-dark    { color: var(--text)   !important; }
+.text-white, .text-white-50 { color: var(--text) !important; }
+
+.bg-light  { background: var(--sub-bg)  !important; }
+.bg-white  { background: var(--sub-bg)  !important; }
+.shadow-sm { box-shadow: none !important; }
+.shadow-lg { box-shadow: 0 8px 32px rgba(0,0,0,.45) !important; }
+.border-bottom { border-bottom-color: var(--sub-bg-2) !important; }
+hr { border-color: var(--sub-bg-2); opacity: 1; }
+.p-3.rounded { background: var(--sub-bg-2) !important; }
+
+/* ── 17. Responsive ──────────────────────────────────────── */
+@media (max-width: 767px) {
+    .sidebar {
+        position: static; height: auto; min-height: auto;
+        flex-direction: row; flex-wrap: wrap; align-items: center;
+        gap: .5rem; padding: .85rem 1rem;
+        border-right: none; border-bottom: 1px solid var(--sub-bg-2); overflow-y: visible;
+    }
+    .brand-box { margin-bottom: 0; }
+    .user-info { display: none; }
+    .sidebar .nav { flex-direction: row !important; flex-wrap: wrap; gap: .2rem; }
+    main { min-height: auto; }
+}
+

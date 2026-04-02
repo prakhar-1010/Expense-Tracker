@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================
+  data.xml  –  Expense Tracker Data Store
+  ============================================================
+  This file stores all application data in three sections:
+    1. users    – registered user accounts
+    2. expenses – individual expense records
+    3. budgets  – monthly budget settings per user
+
+  The DOCTYPE declaration below links this file to dtd.dtd
+  so that the structure can be validated against the DTD rules.
+
+  ID Conventions:
+    users    → u1, u2, u3 …
+    expenses → e1, e2, e3 …
+    budgets  → b1, b2, b3 …
+
+  Passwords are stored as bcrypt hashes (never plain text).
+  Amounts are stored as decimal strings (e.g., "1500.00").
+  Dates are stored in YYYY-MM-DD format.
+  ============================================================
+
+  SAMPLE STRUCTURE (for reference only — data is added via UI):
+
+  <user id="u1">
+      <username>john</username>
+      <password>$2y$10$[bcrypt_hash_here]</password>
+      <email>john@example.com</email>
+      <created_at>2025-03-01</created_at>
+  </user>
+
+  <expense id="e1">
+      <title>Grocery Shopping</title>
+      <amount>850.00</amount>
+      <category>Food</category>
+      <date>2025-03-15</date>
+      <description>Weekly vegetables and groceries</description>
+      <user_id>u1</user_id>
+  </expense>
+
+  <budget id="b1">
+      <user_id>u1</user_id>
+      <month>3</month>
+      <year>2025</year>
+      <amount>5000.00</amount>
+  </budget>
+-->
+<!DOCTYPE expense_tracker SYSTEM "dtd.dtd">
+<expense_tracker>
+
+  <!-- ── Users ───────────────────────────────────────────── -->
+  <!-- Populated automatically when users register via the UI -->
+  <users><user id="u1"><username>hehehe</username><password>$2y$10$rCP3597MZ5.jdHRbeggG6eefri6.Gm9ufFqN7dUkImrDEJZF7Phs2</password><email>travelw692@gmail.com</email><createdat>2026-04-01</createdat></user></users>
+
+  <!-- ── Expenses ─────────────────────────────────────────── -->
+  <!-- Populated automatically when users add expenses        -->
+  <expenses><expense id="e1"><title>Movie</title><amount>900.00</amount><category>Entertainment</category><date>2026-03-29</date><description>Dhurandhar</description><userid>u1</userid></expense><expense id="e2"><title>Park</title><amount>250.00</amount><category>Entertainment</category><date>2026-04-01</date><description>Tree Climbing</description><userid>u1</userid></expense><expense id="e3"><title>kasol</title><amount>5000.00</amount><category>Entertainment</category><date>2026-04-02</date><description>thodi si ****</description><userid>u1</userid><recurringid/></expense><expense id="e4"><title>food</title><amount>100.00</amount><category>Food</category><date>2026-04-29</date><description>breakfast</description><userid>u1</userid><recurringid>r2</recurringid></expense></expenses>
+
+  <!-- ── Budgets ──────────────────────────────────────────── -->
+  <!-- Populated automatically when users set monthly budgets -->
+  <budgets><budget id="b1"><userid>u1</userid><month>4</month><year>2026</year><amount>10000.00</amount></budget></budgets>
+
+<recurring_expenses><recurring id="r1"><userid>u1</userid><title>rapido</title><amount>30.00</amount><category>Transport</category><description>college</description><start_date>2026-04-02</start_date><frequency>monthly</frequency><last_applied_month/><active>1</active></recurring><recurring id="r2"><userid>u1</userid><title>food</title><amount>100.00</amount><category>Food</category><description>breakfast</description><start_date>2026-03-29</start_date><frequency>monthly</frequency><last_applied_month>2026-04</last_applied_month><active>1</active></recurring></recurring_expenses><category_budgets/></expense_tracker>
